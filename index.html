@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"; integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .introText{
+        font-size: 20px;
+    }
+    .tittel{
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    #informasjon {
+        border: solid 2px black;
+        background-color: white;
+        padding: 5px;
+        border-collapse: collapse;
+    }
+    #total {
+        padding: 10px;
+    }
+</style>
+</head>
+<body>
+    
+    <form id="registrering">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <h1 class="tittel">Straumapp</h1>
+
+            </div>
+            <div class="row justify-content-center">
+                <p class="introText">Hei har kan du skjeke strøm pris og gjennomsnitt på hvor mye Kwt bruker du per månede</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <div class="form-group">
+                        <label for="">Kwt månedlig</label>
+                        <input type="number" class="form-control" name="" id="kwtManed" aria-describedby="helpId" placeholder="Skriv inn her">
+                      </div> 
+                </div>
+                
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <div class="form-group">
+
+                      <label for="">Måned</label>
+                      <br>
+                      <select id="maned">
+                        <option id="januar">Januar</option>
+                        <option id="februar">Februar</option>
+                        <option id="mars">Mars</option>
+                        <option id="april">April</option>
+                        <option id="mai">Mai</option>
+                        <option id="juni">Juni</option>
+                        <option id="juli">Juli</option>
+                        <option id="august">August</option>
+                        <option id="september">September</option>
+                        <option id="oktober">Oktober</option>
+                        <option id="november">November</option>
+                        <option id="desember">Desember</option>
+                      </select>
+                      
+                        
+                      
+                    </div>
+                </div>
+                <div>
+                     
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-primary">Registrer</button>
+        </div>
+    
+    </form>
+    <div class="row justify-content-center">
+        <h2>Strømprisen</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div id="total">
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div id = "gjennomsnitt"></div>
+    </div>
+    <div class="row justify-content-center" style="margin-top: 10px; margin-bottom: 10px;">
+        <table id="informasjon"></table>
+    </div>
+    
+    
+    <script>
+        var kwtManed = document.getElementById("kwtManed");
+        var maned =document.getElementById("maned");
+        var array =[];
+        var registrering = document.getElementById("registrering");
+        var informasjon = document.getElementById("informasjon");
+        var prisPerKwt =1.45;
+        
+        registrering.onsubmit = function(evt) {
+            evt.preventDefault();
+            array.push({KwtManed: kwtManed.value, Maned: maned.value});
+            console.log(array);
+            bodySkrive();
+        }
+        function bodySkrive() {
+            informasjon.innerHTML = "";
+            var kwtTotal = 0;
+            var prisTotal = 0;
+            for(var el of array) {
+                if(array.length > 0) {
+                    informasjon.innerHTML += "<tr><td><p>Pris " + el.Maned + ": " + Number(el.KwtManed) * prisPerKwt + "kr</p></tr><tr>Kwt " + el.Maned + " " + el.KwtManed + "kwt<br></tr></td>";
+                    prisTotal += Number(el.KwtManed) * prisPerKwt;
+                    kwtTotal += Number(el.KwtManed);
+                    total.innerHTML = "<p>Total pris er: " + prisTotal + "kr.</p>Til saman har du kjøpt " + kwtTotal + "kwt.";
+                }
+            }
+            var manaderTotal = 0;
+            for(var tal of array) {
+                if(tal.manad === "januar" || tal.manad ==="februar" || tal.manad ==="mars" || tal.manad === "april" || tal.manad ==="mai" || tal.manad ==="juni" || tal.manad ==="juli" || tal.manad ==="august" || tal.manad ==="september" || tal.manad ==="oktober" || tal.manad ==="november" || tal.manad ==="desember");
+                manaderTotal++
+                gjennomsnitt.innerHTML = "<p>Gjennomsnitt pris: " + prisTotal / manaderTotal + "kr</p><p>Gjennomsnitt Kwt: " + kwtTotal / manaderTotal + "kwt</p>";
+            }
+        }
+    </script>
+
+</body>
+
+</html> 
